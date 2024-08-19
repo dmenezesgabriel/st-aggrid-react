@@ -19,7 +19,7 @@ const App: React.FC = () => {
   const [localeText, setLocaleText] = useState<Record<string, string>>({});
   const [rowSelection, setRowSelection] = useState<string>("single");
   const [style, setStyle] = useState<CSSProperties>({});
-  const [pagination, setPagination] = useState<boolean>(false); // New state for pagination
+  const [pagination, setPagination] = useState<boolean>(false);
 
   useEffect(() => {
     // This function is called every time the component is rendered by Streamlit.
@@ -75,8 +75,8 @@ const App: React.FC = () => {
         styleSheet.innerText = customStyles;
         document.head.appendChild(styleSheet);
       }
-
-      Streamlit.setFrameHeight();
+      const currentHeight = document.documentElement.scrollHeight;
+      Streamlit.setFrameHeight(currentHeight);
     };
 
     Streamlit.events.addEventListener(Streamlit.RENDER_EVENT, onRender);

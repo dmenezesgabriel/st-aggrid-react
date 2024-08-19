@@ -44,7 +44,7 @@ df = pd.DataFrame(
 )
 
 column_defs = [
-    {"field": "Product", "filter": True, "editable": True},
+    {"field": "Product", "filter": True, "editable": True, "pinned": "left"},
     {"field": "Category", "filter": True, "editable": True},
     {
         "field": "Price",
