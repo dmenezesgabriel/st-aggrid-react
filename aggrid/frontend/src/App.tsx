@@ -19,7 +19,6 @@ const App: React.FC = () => {
   const [localeText, setLocaleText] = useState<Record<string, string>>({});
   const [rowSelection, setRowSelection] = useState<string>("single");
   const [style, setStyle] = useState<CSSProperties>({});
-  const [gridStyle, setGridStyle] = useState<CSSProperties>({});
   const [pagination, setPagination] = useState<boolean>(false); // New state for pagination
 
   useEffect(() => {
@@ -36,43 +35,45 @@ const App: React.FC = () => {
 
       const theme = renderData.theme;
       if (theme) {
-        const customGridStyle = {
-          "--ag-foreground-color": theme.primaryColor || "var(--text-color)",
-          "--ag-header-background-color":
-            theme.backgroundColor || "var(--background-color)",
-          "--ag-panel-background-color":
-            theme.primaryColor || "var(--primary-color)",
-          "--ag-active-color": theme.primaryColor || "var(--primary-color)",
-          "--ag-background-color":
-            theme.backgroundColor || "var(--background-color)",
-          "--ag-odd-row-background-color": "var(--secondary-background-color)",
-          "--ag-header-foreground-color":
-            theme.textColor || "var(--text-color)",
-          "--ag-font-family": theme.font || "var(--font)",
-          "--ag-row-hover-color": "var(--secondary-background-color)",
-          "--ag-border-color": "var(--secondary-background-color)",
-          "--ag-row-foreground-color": theme.textColor || "var(--text-color)",
-          "--ag-data-color": theme.textColor || "var(--text-color)",
-          "--ag-icon-color": theme.textColor || "var(--text-color)",
-          "--ag-tooltip-background-color": "var(--tooltip-background-color)",
-          "--ag-disabled-foreground-color": "var(--disabled-foreground-color)",
-          "--ag-selected-row-background-color":
-            "var(--selected-row-background-color)",
-          "--ag-menu-background-color": "var(--menu-background-color)",
-          "--ag-row-border-color": "var(--row-border-color)",
-          "--ag-header-cell-hover-background-color":
-            "var(--header-cell-hover-background-color)",
-          "--ag-header-cell-moving-background-color":
-            "var(--header-cell-moving-background-color)",
-          "--ag-checkbox-checked-color": "var(--checkbox-checked-color)",
-          "--ag-checkbox-unchecked-color": "var(--checkbox-unchecked-color)",
-          "--ag-input-border-color": "var(--input-border-color)",
-          "--ag-input-focus-border-color": "var(--input-focus-border-color)",
-          "--ag-input-disabled-border-color":
-            "var(--input-disabled-border-color)",
-        } as CSSProperties;
+        // www.ag-grid.com/react-data-grid/global-style-customisation-widgets/
+        const customStyles = `
+          .ag-theme-quartz {
+            --ag-foreground-color: ${theme.primaryColor || "var(--text-color)"};
+            --ag-header-background-color: ${theme.backgroundColor};
+            --ag-panel-background-color: ${theme.primaryColor};
+            --ag-active-color: ${theme.primaryColor || "var(--primary-color)"};
+            --ag-background-color: ${theme.backgroundColor};
+            --ag-odd-row-background-color: var(--secondary-background-color);
+            --ag-header-foreground-color: ${theme.textColor};
+            --ag-font-family: ${theme.font || "var(--font)"};
+            --ag-row-hover-color: var(--secondary-background-color);
+            --ag-border-color: var(--secondary-background-color);
+            --ag-row-foreground-color: ${theme.textColor};
+            --ag-data-color: ${theme.textColor || "var(--text-color)"};
+            --ag-icon-color: ${theme.textColor || "var(--text-color)"};
+            --ag-tooltip-background-color: var(--tooltip-background-color);
+            --ag-disabled-foreground-color: var(--disabled-foreground-color);
+            --ag-selected-row-background-color: var(--selected-row-background-color);
+            --ag-menu-background-color: ${theme.backgroundColor};
+            --ag-row-border-color: var(--row-border-color);
+            --ag-header-cell-hover-background-color: var(--header-cell-hover-background-color);
+            --ag-header-cell-moving-background-color: var(--header-cell-moving-background-color);
+            --ag-checkbox-checked-color: var(--checkbox-checked-color);
+            --ag-checkbox-unchecked-color: var(--checkbox-unchecked-color);
+            --ag-input-border-color: var(--input-border-color);
+            --ag-input-focus-border-color: var(--input-focus-border-color);
+            --ag-input-disabled-border-color: var(--input-disabled-border-color);
 
-        setGridStyle(customGridStyle);
+            .ag-text-field-input, .ag-number-field-input {
+              background-color: var(--secondary-background-color);
+            }
+          }
+        `;
+
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = customStyles;
+        document.head.appendChild(styleSheet);
       }
 
       Streamlit.setFrameHeight();
@@ -118,7 +119,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="ag-theme-quartz" style={{ ...style, ...gridStyle }}>
+    <div className="ag-theme-quartz" style={style}>
       <AgGridReact
         rowData={rowData}
         columnDefs={columnDefs}
