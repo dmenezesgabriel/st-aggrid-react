@@ -35,6 +35,7 @@ const App: React.FC = () => {
 
       const theme = renderData.theme;
       if (theme) {
+        // https://www.ag-grid.com/react-data-grid/global-style-customisation-colours/
         // www.ag-grid.com/react-data-grid/global-style-customisation-widgets/
         const customStyles = `
           .ag-theme-quartz {

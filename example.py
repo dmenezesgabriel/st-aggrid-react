@@ -3,6 +3,8 @@ import streamlit as st
 
 from aggrid import aggrid
 
+st.set_page_config(layout="wide")
+
 df = pd.DataFrame(
     [
         {
@@ -84,7 +86,7 @@ edited_dataframe = aggrid(
     style={"height": "280px", "width": "100%"},
     locale_text="AG_GRID_LOCALE_BR",
     row_selection="multiple",
-    pagination=False,  # Enable pagination
+    pagination=False,
     key="my_grid",
 )
 st.write(edited_dataframe)

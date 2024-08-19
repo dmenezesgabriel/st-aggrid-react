@@ -61,7 +61,7 @@ def aggrid(
     locale_text: AGGridLocale = "AG_GRID_LOCALE_BR",
     row_selection: AGGridRowSelection = "single",
     style: Optional[Dict[str, Any]] = None,
-    pagination: bool = False,  # New argument for pagination
+    pagination: bool = False,
     key=None,
 ):
     row_data = df.to_dict(orient="records")
@@ -72,7 +72,7 @@ def aggrid(
         localeText=locale_text,
         rowSelection=row_selection,
         style=style,
-        pagination=pagination,  # Pass pagination argument to the frontend
+        pagination=pagination,
         key=key,
         default={},
     )
