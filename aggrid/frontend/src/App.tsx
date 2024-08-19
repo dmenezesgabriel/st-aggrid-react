@@ -103,6 +103,7 @@ const App: React.FC = () => {
       edited: {
         index: event.rowIndex,
         field: event.colDef.field,
+        colId: event.colDef.colId || "",
         oldValue: event.oldValue,
         newValue: event.newValue,
         data: event.data,

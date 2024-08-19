@@ -44,16 +44,38 @@ df = pd.DataFrame(
 )
 
 column_defs = [
-    {"field": "Product", "filter": True, "editable": True, "pinned": "left"},
-    {"field": "Category", "filter": True, "editable": True},
     {
+        "colId": "product",
+        "field": "Product",
+        "filter": True,
+        "editable": True,
+        "pinned": "left",
+    },
+    {
+        "colId": "category",
+        "field": "Category",
+        "filter": True,
+        "editable": True,
+    },
+    {
+        "colId": "price",
         "field": "Price",
         "filter": True,
         "editable": True,
         "valueFormatter": "value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })",
     },
-    {"field": "Stock", "filter": True, "editable": True},
-    {"field": "Brand", "filter": True, "editable": True},
+    {
+        "colId": "stock",
+        "field": "Stock",
+        "filter": True,
+        "editable": True,
+    },
+    {
+        "colId": "brand",
+        "field": "Brand",
+        "filter": True,
+        "editable": True,
+    },
 ]
 
 edited_dataframe = aggrid(
