@@ -34,7 +34,6 @@ const App: React.FC = () => {
       setRowSelection(renderData.args["rowSelection"]);
       setPagination(renderData.args["pagination"] || false); // Set pagination state
       loadLocale(renderData.args["localeText"]);
-
       const theme = renderData.theme;
       if (theme) {
         // https://www.ag-grid.com/react-data-grid/global-style-customisation-colours/
