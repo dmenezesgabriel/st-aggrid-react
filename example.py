@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-from aggrid import aggrid
+from src.st_aggrid import st_aggrid
 
 st.set_page_config(layout="wide")
 
@@ -80,12 +80,12 @@ column_defs = [
     },
 ]
 
-edited_dataframe = aggrid(
+edited_dataframe = st_aggrid(
     df=df,
     column_defs=column_defs,
     style={"height": "280px", "width": "100%"},
     locale_text="AG_GRID_LOCALE_BR",
-    row_selection="multiple",
+    row_selection=None,
     pagination=False,
     key="my_grid",
 )

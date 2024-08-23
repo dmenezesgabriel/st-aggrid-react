@@ -17,7 +17,9 @@ const App: React.FC = () => {
   const [rowData, setRowData] = useState<any[]>([]);
   const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
   const [localeText, setLocaleText] = useState<Record<string, string>>({});
-  const [rowSelection, setRowSelection] = useState<string>("single");
+  const [rowSelection, setRowSelection] = useState<
+    "single" | "multiple" | undefined
+  >(undefined);
   const [style, setStyle] = useState<CSSProperties>({});
   const [pagination, setPagination] = useState<boolean>(false);
 
@@ -29,7 +31,7 @@ const App: React.FC = () => {
       setRowData(renderData.args["rowData"] || []);
       setColumnDefs(renderData.args["columnDefs"] || []);
       setStyle(renderData.args["style"] || {});
-      setRowSelection(renderData.args["rowSelection"] || "single");
+      setRowSelection(renderData.args["rowSelection"]);
       setPagination(renderData.args["pagination"] || false); // Set pagination state
       loadLocale(renderData.args["localeText"]);
 
@@ -104,7 +106,7 @@ const App: React.FC = () => {
       edited: {
         index: event.rowIndex,
         field: event.colDef.field,
-        colId: event.colDef.colId || "",
+        colId: event.colDef.colId,
         oldValue: event.oldValue,
         newValue: event.newValue,
         data: event.data,

@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Callable, Dict, Literal, Optional
 
 import pandas as pd
 import streamlit.components.v1 as components
@@ -55,12 +55,13 @@ AGGridLocale = Literal[
 AGGridRowSelection = Literal["single", "multiple"]
 
 
-def aggrid(
+def st_aggrid(
     df: pd.DataFrame,
     column_defs,
     locale_text: AGGridLocale = "AG_GRID_LOCALE_BR",
-    row_selection: AGGridRowSelection = "single",
+    row_selection: Optional[AGGridRowSelection] = None,
     style: Optional[Dict[str, Any]] = None,
+    on_change: Optional[Callable[..., Any]] = None,
     pagination: bool = False,
     key=None,
 ):
@@ -73,6 +74,7 @@ def aggrid(
         rowSelection=row_selection,
         style=style,
         pagination=pagination,
+        on_change=on_change,
         key=key,
         default={},
     )
